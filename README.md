@@ -1,4 +1,6 @@
-#![logo](./logo.png)
+<p align="center">
+  <a href="./"><img alt="Show logo" src="logo.png" width=300></a>
+</p>
 
 # show
 
