@@ -1,0 +1,17 @@
+{
+  "name": "@annibale/show-cli",
+  "version": "1.0.0",
+  "description": "CLI for 'show' slides",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf ./lib/ && tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^10.9.4",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.0.3"
+  }
+}
