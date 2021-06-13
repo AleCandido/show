@@ -1,5 +1,5 @@
 <script charset="utf-8">
-    import Prova from "$lib/prova.svelte"
+    import Prova from "$lib/Prova.svelte"
 </script>
 
 <h1>Welcome to SvelteKit</h1>
