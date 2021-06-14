@@ -14,5 +14,7 @@ export default function makeNewCommand() {
   });
   new_.action(interact);
 
+  console.log(require.resolve("create-svelte/bin"));
+
   return new_;
 }
