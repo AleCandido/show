@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import * as child from "child_process";
 
 export default async (name: string, options: object, command: object) => {
   console.log("name", typeof name, name);
@@ -9,12 +10,14 @@ export default async (name: string, options: object, command: object) => {
   questions.push({
     type: "list",
     name: "template",
-    message: "Please choose which project template to use",
-    choices: ["JavaScript", "TypeScript"],
-    default: "JavaScript",
+    message: "Ciao, come va?",
+    choices: ["Bene", "Male"],
+    default: "Bene",
   });
 
   const answers = await inquirer.prompt(questions);
 
   console.log(answers);
+
+  child.fork(require.resolve("create-svelte/bin"), [name]);
 };
