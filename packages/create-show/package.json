@@ -1,6 +1,6 @@
 {
   "name": "create-show",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "bin": "./dist/index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@annibale/show-cli": "workspace:*",
-    "commander": "^7.2.0"
+    "commander": "^7.2.0",
+    "create-svelte": ">=2.0.0-next.73"
   }
 }

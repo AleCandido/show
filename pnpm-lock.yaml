@@ -7,11 +7,13 @@ importers:
       '@annibale/show-cli': workspace:*
       '@types/node': ^15.12.2
       commander: ^7.2.0
+      create-svelte: ^2.0.0-next.73
       rimraf: ^3.0.2
       typescript: ^4.3.2
     dependencies:
       '@annibale/show-cli': link:../show-cli
       commander: 7.2.0
+      create-svelte: 2.0.0-next.73
     devDependencies:
       '@types/node': 15.12.2
       rimraf: 3.0.2
