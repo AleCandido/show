@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { program } from "commander";
 // import * as pkg from "../package.json";
 import process from "process";

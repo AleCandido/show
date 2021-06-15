@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { program } from "commander";
 import { new_ } from "@annibale/show-cli";
 import process from "process";
