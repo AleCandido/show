@@ -1,0 +1,22 @@
+{
+  "name": "create-show",
+  "version": "0.0.1",
+  "description": "",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf ./dist/ && tsc",
+    "cli": "pnpm build && create-show"
+  },
+  "author": "Alessandro Candido <candido.ale@gmail.com> (htpps://annibale.dev)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@annibale/show-cli": "workspace:*",
+    "commander": "^7.2.0"
+  }
+}

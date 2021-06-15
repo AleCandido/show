@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import showUtils from "show-utils";
+import showUtils from "@annibale/show-utils";
 
 export default () => {
   const utils = new Command("utils");

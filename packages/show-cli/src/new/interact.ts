@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import * as child from "child_process";
+import run from "./run";
 
 export default async (name: string, options: object, command: object) => {
   console.log("name", typeof name, name);
@@ -18,6 +18,5 @@ export default async (name: string, options: object, command: object) => {
   const answers = await inquirer.prompt(questions);
 
   console.log(answers);
-
-  child.fork(require.resolve("create-svelte/bin"), [name]);
+  run(name);
 };
