@@ -7,7 +7,7 @@ importers:
       '@annibale/show-cli': workspace:*
       '@types/node': ^15.12.2
       commander: ^7.2.0
-      create-svelte: ^2.0.0-next.73
+      create-svelte: '>=2.0.0-next.73'
       rimraf: ^3.0.2
       typescript: ^4.3.2
     dependencies:
@@ -58,6 +58,7 @@ importers:
       commander: ^7.2.0
       create-svelte: '>=2.0.0-next.73'
       inquirer: ^8.1.0
+      kleur: ^4.1.4
       outdent: ^0.8.0
       rimraf: ^3.0.0
       typescript: ^4.0.0
@@ -68,6 +69,7 @@ importers:
       commander: 7.2.0
       create-svelte: 2.0.0-next.73
       inquirer: 8.1.0
+      kleur: 4.1.4
       outdent: 0.8.0
     devDependencies:
       '@types/node': 15.12.2
