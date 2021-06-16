@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 import process from "process";
 import { bold, cyan, gray, green, red } from "kleur/colors";
 import inquirer from "inquirer";
+import prompts from "prompts";
 import { mkdirp, copy } from "./utils";
 
 // prettier-ignore
@@ -17,15 +17,20 @@ If you encounter a problem, open an issue on ${cyan('https://github.com/sveltejs
 
 const version = process.env.npm_package_version;
 
-export default async (name: string) => {
+export type Options = {
+	template: "default" | "skeleton";
+	typescript: boolean;
+	prettier: boolean;
+	eslint: boolean;
+};
+
+export default async (cwd: string) => {
 	console.log(gray(`\ncreate-svelte version ${version}`));
 	console.log(disclaimer);
 
-	const cwd = name;
-
 	if (fs.existsSync(cwd)) {
 		if (fs.readdirSync(cwd).length > 0) {
-			const response = await inquirer.prompt({
+			const response = await prompts({
 				type: "confirm",
 				name: "value",
 				message: "Directory not empty. Continue?",
@@ -40,7 +45,7 @@ export default async (name: string) => {
 		mkdirp(cwd);
 	}
 
-	const options = await inquirer.prompt([
+	const options_usr = await prompts([
 		{
 			type: "toggle",
 			name: "typescript",
@@ -66,7 +71,7 @@ export default async (name: string) => {
 			inactive: "No",
 		},
 	]);
-	options.template = "skeleton";
+	const options: Options = { template: "skeleton", ...options_usr };
 
 	const name = path.basename(path.resolve(cwd));
 
@@ -131,6 +136,13 @@ export default async (name: string) => {
 	console.log(`\nTo close the dev server, hit ${bold(cyan("Ctrl-C"))}`);
 	console.log("\nStuck? Visit us at https://svelte.dev/chat\n");
 };
+type Condition = "eslint" | "prettier" | "typescript" | "skeleton";
+type FileEntry = {
+	name: string;
+	include: Condition[];
+	exclude: Condition[];
+	contents: string;
+};
 
 function write_template_files(
 	template: string,
@@ -147,7 +159,7 @@ function write_template_files(
 		fs.readFileSync(manifest, "utf-8")
 	);
 
-	files.forEach((file: object) => {
+	files.forEach((file: FileEntry) => {
 		const dest = path.join(cwd, file.name);
 		mkdirp(path.dirname(dest));
 
@@ -155,47 +167,32 @@ function write_template_files(
 	});
 }
 
-function write_common_files(
-	cwd: string,
-	options: {
-		template: "skeleton";
-		typescript: boolean;
-		prettier: boolean;
-		eslint: boolean;
-	}
-) {
+function write_common_files(cwd: string, options: Options) {
 	const shared = dist("shared.json");
 	const { files } = JSON.parse(fs.readFileSync(shared, "utf-8"));
 
 	const pkg_file = path.join(cwd, "package.json");
 	const pkg = JSON.parse(fs.readFileSync(pkg_file, "utf-8"));
 
-	files.forEach(
-		(file: {
-			name: string;
-			include: string[];
-			exclude: string[];
-			contents: string;
-		}) => {
-			const include = file.include.every((condition) =>
-				matchesCondition(condition, options)
-			);
-			const exclude = file.exclude.some((condition) =>
-				matchesCondition(condition, options)
-			);
+	files.forEach((file: FileEntry) => {
+		const include = file.include.every((condition: Condition) =>
+			matchesCondition(condition, options)
+		);
+		const exclude = file.exclude.some((condition: Condition) =>
+			matchesCondition(condition, options)
+		);
 
-			if (exclude || !include) return;
+		if (exclude || !include) return;
 
-			if (file.name === "package.json") {
-				const new_pkg = JSON.parse(file.contents);
-				merge(pkg, new_pkg);
-			} else {
-				const dest = path.join(cwd, file.name);
-				mkdirp(path.dirname(dest));
-				fs.writeFileSync(dest, file.contents);
-			}
+		if (file.name === "package.json") {
+			const new_pkg = JSON.parse(file.contents);
+			merge(pkg, new_pkg);
+		} else {
+			const dest = path.join(cwd, file.name);
+			mkdirp(path.dirname(dest));
+			fs.writeFileSync(dest, file.contents);
 		}
-	);
+	});
 
 	pkg.dependencies = sort_keys(pkg.dependencies);
 	pkg.devDependencies = sort_keys(pkg.devDependencies);
@@ -203,15 +200,7 @@ function write_common_files(
 	fs.writeFileSync(pkg_file, JSON.stringify(pkg, null, "  "));
 }
 
-function matchesCondition(
-	condition: "eslint" | "prettier" | "typescript" | "skeleton",
-	options: {
-		template: "skeleton";
-		typescript: boolean;
-		prettier: boolean;
-		eslint: boolean;
-	}
-): boolean {
+function matchesCondition(condition: Condition, options: Options): boolean {
 	return condition === "skeleton"
 		? options.template === condition
 		: options[condition];
@@ -250,6 +239,9 @@ function sort_keys(obj: Record<string, any>) {
 	return sorted;
 }
 
-function dist(path: string) {
-	return fileURLToPath(new URL(`./dist/${path}`, import.meta.url).href);
+function dist(filePath: string) {
+	return path.join(
+		path.dirname(require.resolve("create-svelte/bin")),
+		`./dist/${filePath}`
+	);
 }

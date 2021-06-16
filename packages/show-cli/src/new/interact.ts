@@ -1,22 +1,25 @@
-import inquirer from "inquirer";
-import run from "./run";
+import prompts from "prompts";
+import main from "./bin";
 
 export default async (name: string, options: object, command: object) => {
-  console.log("name", typeof name, name);
-  console.log("options", typeof options, options);
-  console.log("command", typeof command);
-
-  const questions = [];
-  questions.push({
-    type: "list",
-    name: "template",
+  const answers = await prompts({
+    type: "select",
+    name: "salute",
     message: "Ciao, come va?",
-    choices: ["Bene", "Male"],
-    default: "Bene",
+    choices: [
+      {
+        title: "Bene",
+        description: "Alla grande!",
+        value: true,
+      },
+      { title: "Male", value: false },
+      { title: "Non So/Non rispondo", value: null, disabled: true },
+    ],
+    initial: 1,
   });
 
-  const answers = await inquirer.prompt(questions);
+  if (!answers.salute) return;
 
   console.log(answers);
-  run(name);
+  main(name);
 };

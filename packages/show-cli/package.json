@@ -22,11 +22,12 @@
   "dependencies": {
     "@annibale/show-utils": "workspace:*",
     "@types/inquirer": "^7.3.1",
+    "@types/prompts": "^2.0.13",
     "colors": "~1.4.0",
     "commander": "^7.2.0",
     "create-svelte": ">=2.0.0-next.73",
-    "inquirer": "^8.1.0",
     "kleur": "^4.1.4",
-    "outdent": "^0.8.0"
+    "outdent": "^0.8.0",
+    "prompts": "^2.4.1"
   }
 }
