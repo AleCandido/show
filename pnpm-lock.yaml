@@ -29,11 +29,14 @@ importers:
       eslint-plugin-svelte3: ^3.2.0
       prettier: ~2.2.1
       prettier-plugin-svelte: ^2.2.0
+      reveal.js: ^4.1.3
       svelte: ^3.34.0
       svelte-check: ^2.0.0
       svelte-preprocess: ^4.0.0
       tslib: ^2.0.0
       typescript: ^4.0.0
+    dependencies:
+      reveal.js: 4.1.3
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.115_svelte@3.38.2
       '@typescript-eslint/eslint-plugin': 4.27.0_1c5b48a1f115d929d137a72df737d54c
@@ -600,8 +603,8 @@ packages:
       ansi-colors: 4.1.1
     dev: true
 
-  /esbuild/0.12.8:
-    resolution: {integrity: sha512-sx/LwlP/SWTGsd9G4RlOPrXnIihAJ2xwBUmzoqe2nWwbXORMQWtAGNJNYLBJJqa3e9PWvVzxdrtyFZJcr7D87g==}
+  /esbuild/0.12.9:
+    resolution: {integrity: sha512-MWRhAbMOJ9RJygCrt778rz/qNYgA4ZVj6aXnNPxFjs7PmIpb0fuB9Gmg5uWrr6n++XKwwm/RmSz6RR5JL2Ocsw==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -1229,6 +1232,11 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
+  /reveal.js/4.1.3:
+    resolution: {integrity: sha512-5VbL4nVDUedVKnOIIM3UQAIUlp+CvR/SrUkrN5GDoVfcWJAxH2oIh7PWyShy7+pE7tgkH2q+3e5EikGRpgE+oA==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
   /rimraf/3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
@@ -1236,8 +1244,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rollup/2.51.2:
-    resolution: {integrity: sha512-ReV2eGEadA7hmXSzjxdDKs10neqH2QURf2RxJ6ayAlq93ugy6qIvXMmbc5cWMGCDh1h5T4thuWO1e2VNbMq8FA==}
+  /rollup/2.52.0:
+    resolution: {integrity: sha512-lSkBDGsVoXjqaBf7dsHwxBJz+p+hJEP72P+LOitA0yVs+Nzxj76FidkZE2thrmhjwGqLYiJo39opi7mAfaQ/Vg==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -1522,10 +1530,10 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      esbuild: 0.12.8
+      esbuild: 0.12.9
       postcss: 8.3.4
       resolve: 1.20.0
-      rollup: 2.51.2
+      rollup: 2.52.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

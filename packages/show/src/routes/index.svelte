@@ -1,8 +1,24 @@
 <script charset="utf-8">
-    import Prova from "$lib/Prova.svelte"
+	/* import Reveal from "$lib/Reveal.svelte" */
+
+	import { onMount } from 'svelte';
+	let Reveal;
+	onMount(async () => {
+		Reveal = (await import('../lib/Reveal.svelte')).default;
+	});
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<svelte:head>
+<link rel="stylesheet" href="../../node_modules/reveal.js/dist/reset.css" type="text/css">    
+    <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css" type="text/css">    
+<link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/sky.css" type="text/css">    
+</svelte:head>
 
-<Prova/>
+<div class="reveal">
+	<div class="slides">
+		<section>Slide 1</section>
+		<section>Slide 2</section>
+	</div>
+</div>
+
+<svelte:component this={Reveal} />
