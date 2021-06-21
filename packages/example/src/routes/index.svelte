@@ -1,13 +1,41 @@
+<script charset="utf-8" context="module">
+	export async function load({ fetch }) {
+		// Use a `limit` querystring parameter to fetch a limited number of posts
+		// e.g. fetch('posts.json?limit=5') for 5 most recent posts
+		const data = await fetch('/slides.json').then((res) => res.json());
+		return {
+			props: {
+				data
+			}
+		};
+	}
+</script>
+
 <script charset="utf-8">
 	import { onMount } from 'svelte';
+
+	import Cover from '../slides/cover.md';
+
+	export let data;
+
 	let Reveal;
-	onMount(async () => {
-		Reveal = (await import('../../node_modules/@annibale/show/Reveal.svelte')).default;
+	let slides = [];
+	let coverMeta = {};
+	(async () => {
+		coverMeta = (await import('../slides/cover.md')).metadata ?? {};
+		slides = [];
+		for (const slide of data) {
+			let s = await import(`../slides/${slide.name}`);
+            console.log(s, s.metadata);
+            slides.push(s);
+		}
+	})().then(() => {
+		slides = slides;
 	});
-    import S1 from '../slides/1.md';
-    import S2 from '../slides/2.md';
-    import { metadata } from '../slides/2.md';
-    console.log(metadata);
+
+	onMount(async () => {
+        Reveal = (await import('../../node_modules/@annibale/show/Reveal.svelte')).default;
+	});
 </script>
 
 <svelte:head>
@@ -18,12 +46,11 @@
 
 <div class="reveal">
 	<div class="slides">
-        <section><S1/></section>
-        <section><S2/></section>
+		<section><Cover {...coverMeta} /></section>
+		{#each slides as slide}
+			<section><svelte:component this={slide.default} /></section>
+		{/each}
 	</div>
 </div>
 
-
 <svelte:component this={Reveal} />
-
-
