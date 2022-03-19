@@ -11,7 +11,7 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@annibale/show": "workspace:*",
+		"@slideshow/show": "workspace:*",
 		"@sveltejs/adapter-static": "next",
 		"@sveltejs/kit": "next",
 		"mdsvex": "^0.9.3",

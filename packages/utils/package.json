@@ -1,5 +1,5 @@
 {
-  "name": "@annibale/show-utils",
+  "name": "@slideshow/utils",
   "version": "0.0.1",
   "description": "extra utilities for writing presentations",
   "main": "./dist/index.js",
