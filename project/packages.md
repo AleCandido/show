@@ -7,6 +7,8 @@ Packages goals summary:
 - `cli`: here is the code used to create and manage a `show` project
 - `create-show`: just an easy way to get started
   - makes use of primitives inside the `cli`
+- `utils`: extra utilities to write presentations
+  - no front-end, just API
 
 ## `show`
 
@@ -26,6 +28,9 @@ All the commands going to be implemented:
 For all the developments commands, use directly `kit` ones through
 `npm`/`yarn`/`pnpm`.
 
+In general, it should not be required for a very plain project, with manual
+export, but only for extra chores (`export`, `clipng`, ...).
+
 ### New
 
 Add a top-level configuration file, do not add further configurations to an
@@ -39,3 +44,13 @@ existing file (like `svelte.config.js`), not even `package.json`:
 Bundled folder:
 
 - make sure to use `adapter-static`
+
+## `utils`
+
+This will be populated by stuffs like `clipng`, randomly created for specific
+goals.
+
+It will provide only JS/TS API.
+
+If a front-end is needed (and it is), the package will be a dependency of `cli`,
+that will provide a suitable subcommand access.
