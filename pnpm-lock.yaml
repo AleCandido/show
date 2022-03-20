@@ -108,6 +108,12 @@ importers:
       tslib: 2.3.0
       typescript: 4.3.2
 
+  packages/show/package:
+    specifiers:
+      reveal.js: ^4.1.3
+    dependencies:
+      reveal.js: 4.1.3
+
   packages/utils:
     specifiers:
       '@types/node': ^15.0.0
