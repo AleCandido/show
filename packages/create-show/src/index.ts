@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import { new_ } from "@annibale/show-cli";
+import { new_ } from "@slideshow/cli";
 import process from "process";
-import { create as createSvelte } from "create-svelte";
 
 console.log(process.argv);
 process.argv.splice(2, 0, "new");
@@ -16,4 +15,4 @@ async function main() {
   program.parse(process.argv);
 }
 
-run();
+main();

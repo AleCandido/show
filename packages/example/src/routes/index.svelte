@@ -34,7 +34,7 @@
 	});
 
 	onMount(async () => {
-        Reveal = (await import('../../node_modules/@annibale/show/Reveal.svelte')).default;
+        Reveal = (await import('../../node_modules/@slideshow/show/Reveal.svelte')).default;
 	});
 </script>
 
