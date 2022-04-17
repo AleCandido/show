@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo 'To be implemented' && exit 1",
     "cli": "pnpm build && show",
-    "build": "rimraf ./dist/ && tsc"
+    "build": "rimraf ./dist/ && tsc",
+    "prepublishOnly": "pnpm build"
   },
   "author": "",
   "license": "ISC",
