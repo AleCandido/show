@@ -10,28 +10,28 @@ importers:
       '@types/node': ^15.0.0
       '@types/prompts': ^2.0.13
       colors: ~1.4.0
-      commander: ^7.2.0
-      create-svelte: '>=2.0.0-next.73'
+      commander: ^9.2.0
+      create-svelte: '>=2.0.0-next.129'
       kleur: ^4.1.4
       outdent: ^0.8.0
       prompts: ^2.4.1
       rimraf: ^3.0.0
-      typescript: ^4.0.0
+      typescript: ^4.6.3
     dependencies:
       '@slideshow/show': link:../show
       '@slideshow/utils': link:../utils
       '@types/inquirer': 7.3.1
       '@types/prompts': 2.0.13
       colors: 1.4.0
-      commander: 7.2.0
-      create-svelte: 2.0.0-next.126
+      commander: 9.2.0
+      create-svelte: 2.0.0-next.129
       kleur: 4.1.4
       outdent: 0.8.0
       prompts: 2.4.2
     devDependencies:
       '@types/node': 15.12.2
       rimraf: 3.0.2
-      typescript: 4.3.2
+      typescript: 4.6.3
 
   packages/create-show:
     specifiers:
@@ -107,12 +107,12 @@ importers:
   packages/utils:
     specifiers:
       '@types/node': ^15.0.0
-      commander: ^7.2.0
+      commander: ^9.2.0
       outdent: ^0.8.0
       rimraf: ^3.0.0
       typescript: ^4.0.0
     dependencies:
-      commander: 7.2.0
+      commander: 9.2.0
       outdent: 0.8.0
     devDependencies:
       '@types/node': 15.12.2
@@ -533,12 +533,25 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
+  /commander/9.2.0:
+    resolution: {integrity: sha512-e2i4wANQiSXgnrBlIatyHtP1odfUp0BbV5Y5nEGbxtIrStkEOAAzCUirvLBNXHLr7kwLvJl6V+4V3XV9x7Wd9w==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: false
+
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /create-svelte/2.0.0-next.126:
     resolution: {integrity: sha512-/vEpUgy5BTftEJK46ev5cwV9VHWKa56V8BMF3kjw1gORdom/1lW0Jb/Xhem6lGEViljHy75/ISxMxhEpCUwn0w==}
+    hasBin: true
+    dependencies:
+      kleur: 4.1.4
+      prompts: 2.4.2
+    dev: false
+
+  /create-svelte/2.0.0-next.129:
+    resolution: {integrity: sha512-m1gAmmXWT28ItPh14npm3hNaa6PzqRMtXFePcWgeW7gM5zwxg7tK/+D5Q4WwZPxkr7N9UKmydFTq41+yfqyNjA==}
     hasBin: true
     dependencies:
       kleur: 4.1.4
@@ -1802,6 +1815,12 @@ packages:
 
   /typescript/4.3.2:
     resolution: {integrity: sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.6.3:
+    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

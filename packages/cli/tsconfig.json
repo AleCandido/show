@@ -4,18 +4,21 @@
   "compilerOptions": {
     /* Basic Options */
     "incremental": true /* Enable incremental compilation */,
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ES6",
+    "module": "CommonJS",
     "lib": ["ES5", "ES2015.collection", "ES2015.Iterable", "ES2015.Promise"],
     // "allowJs": true,                             /* Allow javascript files to be compiled. */
     // "checkJs": true,                             /* Report errors in .js files. */
-    "resolveJsonModule": true,
+    // "resolveJsonModule": true,
     "declaration": true,
     "sourceMap": true,
     "outDir": "./dist",
 
     "strict": true /* Enable all strict type-checking options. */,
     "strictNullChecks": true,
+
+    "allowJs": true,
+    "checkJs": true,
 
     "types": ["node"],
     "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
@@ -27,6 +30,6 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["cli.ts", "index.ts", "src/**/*.ts"],
+  "include": ["src/**/*.ts", "decs.d.ts"],
   "exclude": ["node_modules"]
 }
