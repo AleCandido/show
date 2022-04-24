@@ -1,30 +1,22 @@
-import remarkGithub from 'remark-github';
-import remarkAbbr from 'remark-abbr';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkAbbr from "remark-abbr";
+import remarkBreaks from "remark-breaks";
+import remarkGFM from "remark-gfm";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export default {
-	extensions: ['.svelte.md', '.md', '.svx'],
-	smartypants: {
-		dashes: 'oldschool'
-	},
-	remarkPlugins: [
-		[
-			remarkGithub,
-			{
-				// Use your own repository
-				repository: 'https://github.com/mvasigh/sveltekit-mdsvex-blog.git'
-			}
-		],
-		remarkAbbr
-	],
-	rehypePlugins: [
-		rehypeSlug,
-		[
-			rehypeAutolinkHeadings,
-			{
-				behavior: 'wrap'
-			}
-		]
-	]
+  extensions: [".svelte.md", ".md", ".svx"],
+  smartypants: {
+    dashes: "oldschool",
+  },
+  remarkPlugins: [remarkAbbr, remarkBreaks, remarkGFM],
+  rehypePlugins: [
+    [
+      rehypeAutolinkHeadings,
+      {
+        behavior: "wrap",
+      },
+    ],
+    rehypeSlug,
+  ],
 };
