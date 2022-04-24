@@ -1,20 +1,31 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  /* import Reveal from 'reveal.js'; */
 
-  let reveal = {
-    /* plugins: [Highlight], */
-    hash: true
-  };
+  export let reveal = { plugins: [], hash: true };
+
+  let Reveal;
+  function loadReveal(configs: any) {
+    // attempt to load reveal
+    try {
+      const deck = new Reveal(configs);
+      deck.initialize();
+    } catch (err) {
+      // if the constructor has not yet been loaded, do nothing
+    }
+  }
 
   onMount(async () => {
-    let Reveal = (await import('reveal.js')).default;
+    Reveal = (await import('reveal.js')).default;
 
     await tick();
-    const deck = new Reveal(reveal);
-    deck.initialize();
+    loadReveal(reveal);
   });
 
+  // update reactively for lazy loaded plugins
+  // and in general for any configs update
+  $: loadReveal(reveal);
+
+  // import default stylesheets
   import 'reveal.js/dist/reset.css';
   import 'reveal.js/dist/reveal.css';
 </script>
