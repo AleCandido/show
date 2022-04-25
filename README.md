@@ -4,6 +4,7 @@
 
 # show
 
-Make slides with Reveal, powered by Svelte.
+Make slides with [Reveal.js](https://revealjs.com/), powered by
+[Svelte](https://svelte.dev/) and [Kit](https://kit.svelte.dev/).
 
 > second edition of [`slipy`](https://github.com/AleCandido/slipy/)
