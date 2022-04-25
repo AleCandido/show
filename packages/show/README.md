@@ -1,6 +1,4 @@
-<p align="right">
-  <a href="./"><img alt="Show logo" src="../../logo.png" width=200></a>
-</p>
+<a href="./"><img alt="Show logo" src="../../logo.png" width=200 align="right"></a>
 
 # show
 
