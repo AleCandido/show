@@ -1,4 +1,4 @@
-import structuredClone from '@ungap/structured-clone';
+import { klona } from 'klona';
 import type { RevealOptions } from 'reveal.js';
 
 const configs: RevealOptions = {
@@ -7,5 +7,5 @@ const configs: RevealOptions = {
 };
 
 export default function () {
-  return structuredClone(configs);
+  return klona(configs);
 }
