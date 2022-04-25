@@ -1,6 +1,6 @@
 {
   "name": "@slideshow/show",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "library of show components",
   "author": "Alessandro Candido <candido.ale@gmail.com>",
   "scripts": {
