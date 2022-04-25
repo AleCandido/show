@@ -1,7 +1,7 @@
 {
   "name": "@slideshow/show",
-  "version": "0.0.3",
-  "description": "library of show components",
+  "version": "0.0.5",
+  "description": "main library of show components",
   "author": "Alessandro Candido <candido.ale@gmail.com>",
   "scripts": {
     "dev": "svelte-kit dev",
