@@ -1,29 +1,48 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
+  import type { Plugin, RevealOptions, RevealStatic } from 'reveal.js';
+  import defaultConfigs from './configs'
 
-  export let reveal = { plugins: [], hash: true };
+  export let configs: RevealOptions = {};
+  export let plugins: Plugin[] = [];
 
-  let Reveal;
-  function loadReveal(configs: any) {
-    // attempt to load reveal
+  let reveal: RevealStatic;
+  let fullConfigs: RevealOptions = defaultConfigs();
+
+  /* reinitialize reveal
+   *
+   * reinitialization is needed in order to load plugins, for any other
+   * configuration a simpler `reveal.configure(configs)` is enough -> use
+   * `reconf`
+   */
+  function reinit(plugins: Plugin[]) {
+    fullConfigs.plugins = plugins;
     try {
-      const deck = new Reveal(configs);
-      deck.initialize();
-    } catch (err) {
-      // if the constructor has not yet been loaded, do nothing
-    }
+      reveal.initialize(fullConfigs);
+    } catch (err) {}
+  }
+
+  /* reconfigure reveal */
+  function reconf(configs: RevealOptions) {
+    try {
+      reveal.configure(configs);
+    } catch (err) {}
   }
 
   onMount(async () => {
-    Reveal = (await import('reveal.js')).default;
+    const Reveal = (await import('reveal.js')).default;
 
     await tick();
-    loadReveal(reveal);
+
+    reveal = new Reveal(configs);
+    reveal.initialize();
   });
 
   // update reactively for lazy loaded plugins
   // and in general for any configs update
-  $: loadReveal(reveal);
+  $: reinit(plugins);
+  fullConfigs = Object.assign(fullConfigs, configs)
+  $: reconf(fullConfigs);
 
   // import default stylesheets
   import 'reveal.js/dist/reset.css';

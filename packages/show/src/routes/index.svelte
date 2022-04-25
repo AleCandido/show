@@ -2,26 +2,28 @@
   import { onMount } from 'svelte';
 
   import Reveal from '$lib/Reveal.svelte';
-  import Highlight from '$lib/plugins/highlight';
+  import loadPlugins from '$lib/plugins';
+  import type {Plugin} from 'reveal.js';
 
-  let reveal = {
-    plugins: [],
-    hash: true
-  };
+  let configs = {};
+  let plugins: Plugin[] = [];
 
   onMount(async () => {
-    reveal.plugins = reveal.plugins.concat(await Highlight());
+    plugins = plugins.concat(await loadPlugins('highlight', 'zoom'));
   });
 
   import 'reveal.js/dist/theme/serif.css';
-  import 'highlight.js/styles/nord.css';
+  import 'highlight.js/styles/github.css';
 </script>
 
 <svelte:head>
   <title>Sandbox</title>
 </svelte:head>
 
-<Reveal {reveal}>
+<Reveal {configs} {plugins}>
+  <section>
+    <h1>Cover</h1>
+  </section>
   <section>
     <h2>Slide 1</h2>
     <pre>
@@ -33,8 +35,5 @@
                 (lazy-cons (+ a b) (rfib b (+ a b)))) 0 1)))
       </code>
     </pre>
-  </section>
-  <section>
-    <h2>Slide 2</h2>
   </section>
 </Reveal>
