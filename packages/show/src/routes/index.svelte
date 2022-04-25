@@ -3,7 +3,7 @@
 
   import Reveal from '$lib/Reveal.svelte';
   import loadPlugins from '$lib/plugins';
-  import type {Plugin} from 'reveal.js';
+  import type { Plugin } from 'reveal.js';
 
   let configs = {};
   let plugins: Plugin[] = [];

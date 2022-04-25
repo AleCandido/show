@@ -1,16 +1,4 @@
-import type { Plugin } from 'reveal.js';
-
-export default async function (...names: string[]): Promise<Plugin[]> {
-  let plugins = [];
-
-  for (const name of names) {
-    const plugin = eval(name);
-
-    plugins.push(await plugin());
-  }
-
-  return plugins;
-}
+//built-in plugins
 
 export async function highlight() {
   let Highlight = (await import('reveal.js/plugin/highlight/highlight.esm')).default;
@@ -35,3 +23,19 @@ export async function zoom() {
 
   return Zoom;
 }
+
+//extra plugins
+
+export async function customcontrols() {
+  await import('reveal.js-plugins/customcontrols/plugin');
+
+  return window.RevealCustomControls;
+}
+
+export async function chalkboard() {
+  await import('reveal.js-plugins/chalkboard/plugin');
+
+  return window.RevealChalkboard;
+}
+
+export default { highlight, notes, search, zoom, customcontrols, chalkboard };

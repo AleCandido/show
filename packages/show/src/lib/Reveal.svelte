@@ -1,15 +1,20 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import type { Plugin, RevealOptions, RevealStatic } from 'reveal.js';
-  import defaultConfigs from './configs'
+  import defaultConfigs from './configs';
 
+  // user specified configs
   export let configs: RevealOptions = {};
+  // user loaded plugins
   export let plugins: Plugin[] = [];
 
+  // global reveal instance
   let reveal: RevealStatic;
+  // actual configs used, initialized to default
   let fullConfigs: RevealOptions = defaultConfigs();
 
-  /* reinitialize reveal
+  /**
+   * reinitialize reveal
    *
    * reinitialization is needed in order to load plugins, for any other
    * configuration a simpler `reveal.configure(configs)` is enough -> use
@@ -18,13 +23,17 @@
   function reinit(plugins: Plugin[]) {
     fullConfigs.plugins = plugins;
     try {
+      // only perform if reveal has been created
       reveal.initialize(fullConfigs);
     } catch (err) {}
   }
 
-  /* reconfigure reveal */
+  /**
+   *reconfigure reveal
+   */
   function reconf(configs: RevealOptions) {
     try {
+      // only perform if reveal has been created
       reveal.configure(configs);
     } catch (err) {}
   }
@@ -39,9 +48,9 @@
   });
 
   // update reactively for lazy loaded plugins
-  // and in general for any configs update
   $: reinit(plugins);
-  fullConfigs = Object.assign(fullConfigs, configs)
+  // and in general for any configs update
+  fullConfigs = Object.assign(fullConfigs, configs);
   $: reconf(fullConfigs);
 
   // import default stylesheets
