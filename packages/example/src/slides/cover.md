@@ -1,3 +1,7 @@
+---
+bene: grazie
+---
+
 # Ciao
 
-come, va?
+come, va? bene {bene}

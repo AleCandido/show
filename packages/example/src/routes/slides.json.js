@@ -1,36 +1,32 @@
 import { basename } from "path";
 
-export async function get({ event }) {
+export async function get() {
   const modules = import.meta.glob("../slides/*.{md,svx,svelte.md}");
 
-  const postPromises = [];
-  // const limit = Number(query.get('limit') ?? Infinity);
-
-  // if (Number.isNaN(limit)) {
-  // return {
-  // status: 400
-  // };
-  // }
+  const slidesPromises = [];
 
   for (let [path, resolver] of Object.entries(modules)) {
     const name = basename(path);
-    const promise = resolver().then((post) => {
-      // console.log(post.default);
+
+    const num = Number(name.split(".")[0]);
+    if (Number.isNaN(num)) {
+      continue;
+    }
+
+    const promise = resolver().then((slide) => {
       return {
         name,
-        metadata: post.metadata,
+        num,
+        metadata: slide.metadata,
       };
     });
 
-    postPromises.push(promise);
+    slidesPromises.push(promise);
   }
 
-  const slides = await Promise.all(postPromises);
-  // const publishedPosts = posts.filter((post) => post.published).slice(0, limit);
+  let slides = await Promise.all(slidesPromises);
 
-  // publishedPosts.sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
+  slides.sort((a, b) => a.num - b.num);
 
-  return {
-    body: slides,
-  };
+  return { body: slides };
 }
